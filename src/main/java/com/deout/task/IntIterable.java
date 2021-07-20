@@ -1,6 +1,7 @@
 package com.deout.task;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class IntIterable implements Iterable<Integer> {
     int[] backed;
@@ -20,17 +21,39 @@ public class IntIterable implements Iterable<Integer> {
 
         public boolean hasNext() {
             //TODO: Your task is implement this method
-            return false;
+            if (index < IntIterable.this.backed.length) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
 
         public Integer next() {
             //TODO: Your task is implement this method
-            return 0;
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return backed[index++];
         }
+
+
+
 
         public void remove() {
             //TODO: Your task is implement this method
-            throw new IllegalStateException("Could not remove from array");
+            if(index < 0 || index >= backed.length){
+                throw new IllegalStateException("Could not remove from array");
+
+
+            }else {
+
+                for(int i = index; i < backed.length-1; i++) {
+                   if(hasNext()) {backed[i] = backed[i+1];}
+                }
+
         }
     }
+
+}
 }
