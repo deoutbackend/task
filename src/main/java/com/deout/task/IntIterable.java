@@ -50,6 +50,12 @@ public class IntIterable implements Iterable<Integer> {
 
                 for(int i = index; i < backed.length-1; i++) {
                    if(hasNext()) {backed[i] = backed[i+1];}
+                     else {
+
+                    backed[index]= 0;
+
+                       index=0;
+                   }
                 }
 
         }
