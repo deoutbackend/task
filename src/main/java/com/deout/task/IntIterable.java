@@ -32,11 +32,23 @@ public class IntIterable implements Iterable<Integer> {
         }
 
         public void remove() {
-            if (elementRemoved) {
+            if (index < 0 || index >= backed.length) {
                 throw new IllegalStateException("Could not remove from array");
+
+
+            } else {
+
+                for (int i = index; i < backed.length - 1; i++) {
+                    if (hasNext()) {
+                        backed[i] = backed[i + 1];
+                    } else {
+
+                        backed[index] = 0;
+
+                        index = 0;
+                    }
+                }
             }
-            elementRemoved = true;
-            backed[index] = 0;
         }
     }
 }
