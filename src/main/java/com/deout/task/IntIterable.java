@@ -1,6 +1,8 @@
 package com.deout.task;
 
-import java.util.Iterator;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.*;
 
 public class IntIterable implements Iterable<Integer> {
     int[] backed;
@@ -15,22 +17,32 @@ public class IntIterable implements Iterable<Integer> {
     }
 
     private int index = 0 ;
+    private boolean canRemove = false;
 
     private class IntIterator implements Iterator<Integer> {
 
         public boolean hasNext() {
-            //TODO: Your task is implement this method
-            return false;
+            return index < backed.length;
         }
 
         public Integer next() {
-            //TODO: Your task is implement this method
-            return 0;
+            if (hasNext()) {
+                return backed[index++];
+            }
+            throw new NoSuchElementException();
         }
 
         public void remove() {
-            //TODO: Your task is implement this method
-            throw new IllegalStateException("Could not remove from array");
+
+            if (!hasNext()) {
+                throw new IllegalStateException("Could not remove from array");
+            }
+
+            if (index > 0) {
+                index--;
+            }
+
+            backed = ArrayUtils.remove(backed, index);
         }
     }
 }
