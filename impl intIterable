@@ -1,0 +1,56 @@
+package com.deout.task;
+
+import java.util.Iterator;
+
+public class IntIterable implements Iterable<Integer> {
+    int[] backed;
+
+
+    public IntIterable(int[] backed) {
+        this.backed = backed;
+    }
+
+    public Iterator<Integer> iterator() {
+        return new IntIterator();
+    }
+
+    private int index = 0 ;
+
+    private class IntIterator implements Iterator<Integer> {
+
+        public boolean hasNext() {
+            if (backed !=null){
+                if (index < backed.length){
+                    return true;
+                }
+            }
+            //TODO: Your task is implement this method
+            return false;
+        }
+
+        public Integer next() {
+
+            int i = index;
+            if (i == backed.length-1){
+                index = index +1;
+                return backed[i];
+            }
+            //TODO: Your task is implement this method
+            index = index +1;
+            return backed[i];
+        }
+
+        public void remove() {
+            int []dublicate = new int[backed.length-1];
+            int count = 0;
+            for (int i = 0; i < backed.length;i++ ) {
+                if (i!=index-1){
+                    dublicate[count] = backed[i];
+                    count++;
+                }
+            }
+            backed = dublicate;
+            //TODO: Your task is implement this method
+        }
+    }
+}
