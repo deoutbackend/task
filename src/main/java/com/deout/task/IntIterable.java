@@ -17,31 +17,28 @@ public class IntIterable implements Iterable<Integer> {
     private int index = 0;
 
     private class IntIterator implements Iterator<Integer> {
-        //TODO: Your task is implement this method
+
         public boolean hasNext() {
-            return index < backed.length && backed[index] != 0;
+            //TODO: Your task is implement this method
+            return index < backed.length;
 
         }
 
         public Integer next() {
             //TODO: Your task is implement this method
-            if (backed[index++] != 0) {
-                return backed[index++];
-            }
-            return 0;
+            return backed[index++];
         }
 
         public void remove() {
             //TODO: Your task is implement this method
-            int[] newArr = new int[backed.length - 1];
-            for (int i = 0, j = 0; i < backed.length; i++) {
-                if (i == index) {
-                    continue;
+            for (int i = 0; i < backed.length; i++) {
+                if (backed[i] == index) {
+                    for (int j = i; j < backed.length - 1; j++) {
+                        backed[j] = backed[j + 1];
+                    }
+                    break;
                 }
-                newArr[j++] = backed[i];
             }
-            // set link to new array without deleted element
-            backed = newArr;
             throw new IllegalStateException("Could not remove from array");
         }
     }
