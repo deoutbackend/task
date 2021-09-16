@@ -20,7 +20,7 @@ public class IntIterable implements Iterable<Integer> {
     private class IntIterator implements Iterator<Integer> {
 
         public boolean hasNext() {
-            return index <= backed.length - 1;
+            return index < backed.length;
 
             //TODO: Your task is implement this method
         }
@@ -28,7 +28,7 @@ public class IntIterable implements Iterable<Integer> {
         public Integer next() {
             if (backed == null) return null;
 
-            return backed.length != 0 ? backed[index++] : null;
+            return backed[index++];
 
             //TODO: Your task is implement this method
         }
