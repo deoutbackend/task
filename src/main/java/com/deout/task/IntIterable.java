@@ -19,7 +19,6 @@ public class IntIterable implements Iterable<Integer> {
     private int index = 0 ;
 
     private class IntIterator implements Iterator<Integer> {
-
         public boolean hasNext() {
             //TODO: Your task is implement this method
             while (index < backed.length){
@@ -42,5 +41,6 @@ public class IntIterable implements Iterable<Integer> {
             }
             IntStream.range(0, backed.length).filter(i -> i != index).map(i -> backed[i]).toArray();
         }
+
     }
 }
