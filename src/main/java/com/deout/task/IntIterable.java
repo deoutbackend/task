@@ -20,11 +20,18 @@ public class IntIterable implements Iterable<Integer> {
 
         public boolean hasNext() {
             //TODO: Your task is implement this method
+            if (index < backed.length) {
+                return true;
+            }
+
             return false;
         }
 
         public Integer next() {
             //TODO: Your task is implement this method
+            if (hasNext()) {
+                return backed[index++];
+            }
             return 0;
         }
 
