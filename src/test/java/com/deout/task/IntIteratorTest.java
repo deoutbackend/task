@@ -3,8 +3,7 @@ package com.deout.task;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class IntIteratorTest {
 
@@ -24,7 +23,23 @@ public class IntIteratorTest {
     public void testBlankForeach() {
         int[] arr = new int[0];
         for (Integer el : new IntIterable(arr)) {
-            assertFalse("Shouldn't come here", true);
+            fail("Shouldn't come here");
         }
     }
+
+    @Test
+    public void testRemoveElement() {
+        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr1 = {1, 2, 4, 5};
+        int i = 0;
+        IntIterable intIterable = new IntIterable(arr);
+        while (intIterable.iterator().hasNext()) {
+            if (arr[i] == 3)
+                intIterable.iterator().remove();
+            intIterable.iterator().next();
+            i++;
+        }
+        assertArrayEquals("arrays are not equal", intIterable.backed, arr1);
+    }
+
 }
